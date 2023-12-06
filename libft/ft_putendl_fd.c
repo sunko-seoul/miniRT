@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 16:01:31 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/06 16:49:09 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/06 16:45:22 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/06 16:48:20 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <sys/types.h>
+#include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar_fd(const char c, int fd);
-void	ft_putstr_fd(const char *s, int fd);
-void	ft_putendl_fd(const char *s, int fd);
-
-#endif
+void	ft_putendl_fd(const char *s, int fd)
+{
+	if (s == 0)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}

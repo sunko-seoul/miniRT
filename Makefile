@@ -4,7 +4,7 @@ CC = cc
 CFLAG = -Wall -Wextra -Werror
 RM = rm -f
 
-SRC = minirt.c
+SRCS = minirt.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
@@ -15,23 +15,24 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $^ $(MLXFLAGS)
 
-$(LIBFT)
+$(LIBFT):
 	cd libft && $(MAKE)
 
-$(MLX)
+$(MLX):
 	cd mlx && $(MAKE)
 
-%.o: $.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS) .bonus
 	cd libft && $(MAKE) $@
+	cd mlx && $(MAKE) $@
 
 fclean: clean
 	$(RM) $(NAME)
 	cd libft && $(MAKE) $@
-	cd mlx && $(MAKE) $@
+	cd mlx && $(MAKE) $<
 
 re:
 	$(MAKE) fclean

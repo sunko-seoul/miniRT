@@ -6,16 +6,18 @@ AR = ar
 ARFLAGS = r
 RM = rm -f
 
-SRCS =
+SRCS = ft_putchar_fd.c \
+	   ft_putendl_fd.c \
+	   ft_putstr_fd.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(NAME) ($(OBJS))
+$(NAME): $(NAME)($(OBJS))
 
 (%.o): %.c libft.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $% $<
 	$(AR) $(ARFLAGS) $@ $%
 
 clean:
