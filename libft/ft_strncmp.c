@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 16:01:31 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/06 23:08:10 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/06 23:07:09 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/06 23:07:16 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <sys/types.h>
+#include "libft.h"
 
-void	ft_putchar_fd(const char c, int fd);
-void	ft_putstr_fd(const char *s, int fd);
-void	ft_putendl_fd(const char *s, int fd);
-char	*ft_strchr(const char *s, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	c1;
+	unsigned char	c2;
 
-#endif
+	if (s1 == 0 || s2 == 0)
+		return (0);
+	while (n-- && (*s1 || *s2))
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+			return (c1 - c2);
+	}
+	return (0);
+}
