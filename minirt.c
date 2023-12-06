@@ -6,25 +6,17 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:30:28 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/06 17:25:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/06 22:58:02 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "libft.h"
+#include "minirt.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -34,9 +26,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	main(int argc, char *argv[])
 {
-	void	*mlx;
-	t_data	img;
-	void	*mlx_win;
+	t_parm		parm;
 
 	if (argc != 2)
 	{
@@ -44,17 +34,10 @@ int	main(int argc, char *argv[])
 		ft_putendl_fd("Invaild number of arguments", 2);
 		exit(EXIT_FAILURE);
 	}
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	printf("img.addr = %p\n", img.addr);
-	printf("bits_per_pixel = %d\n", img.bits_per_pixel);
-	printf("line_length = %d\n", img.line_length);
-	printf("endian = %d\n", img.endian);
-
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	init_mlx(&parm.mlx_data);
+	mlx_put_image_to_window(parm.mlx_data.mlx, parm.mlx_data.win, parm.mlx_data.img, 0, 0);
+	mlx_hook(parm.mlx_data.win, ON_DESTROY, 0, destroy_window, &parm.mlx_data);
+	mlx_hook(parm.mlx_data.win, ON_KEYDOWN, 0, handle_key_press, &parm);
+	mlx_loop(parm.mlx_data.mlx);
 }
 
