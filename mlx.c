@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 22:30:05 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/06 23:18:16 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/07 21:24:42 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ void	init_mlx(t_mlx_data *mlx_data)
 	mlx_data->mlx = mlx_init();
 	if (!mlx_data->mlx)
 	{
-		ft_putendl_fd("mlx_init: Error", 2);
+		ft_putendl_fd("Error\nmlx_init", 2);
 		exit(EXIT_FAILURE);
 	}
 	mlx_data->win = mlx_new_window(mlx_data->mlx, 1920, 1080, "miniRT");
 	if (!mlx_data->win)
 	{
-		ft_putendl_fd("mlx_new_window: Error", 2);
+		ft_putendl_fd("Error\nmlx_new_window", 2);
 		exit(EXIT_FAILURE);
 	}
 	mlx_data->img = mlx_new_image(mlx_data->mlx, 1920, 1080);
 	if (!mlx_data->img)
 	{
-		ft_putendl_fd("mlx_new_image: Error", 2);
+		ft_putendl_fd("Error\nmlx_new_image", 2);
 		exit(EXIT_FAILURE);
 	}
 	mlx_data->addr = mlx_get_data_addr(mlx_data->img,\
 		&mlx_data->bits_per_pixel, &mlx_data->line_length, &mlx_data->endian);
 	if (!mlx_data->addr)
 	{
-		ft_putendl_fd("mlx_get_data_addr: Error", 2);
+		ft_putendl_fd("Error\nmlx_get_data_addr", 2);
 		exit(EXIT_FAILURE);
 	}
 }
